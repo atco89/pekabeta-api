@@ -2,15 +2,15 @@ package persistence
 
 import (
 	"github.com/google/uuid"
-	"go.mongodb.org/mongo-driver/mongo"
+	"github.com/jinzhu/gorm"
 	"pekabeta/internal/domain"
 )
 
 type InvoiceRepository struct {
-	Conn *mongo.Database
+	Conn *gorm.DB
 }
 
-func NewInvoiceRepository(conn *mongo.Database) *InvoiceRepository {
+func NewInvoiceRepository(conn *gorm.DB) *InvoiceRepository {
 	return &InvoiceRepository{Conn: conn}
 }
 

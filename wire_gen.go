@@ -7,7 +7,7 @@ package main
 
 import (
 	"github.com/google/wire"
-	"go.mongodb.org/mongo-driver/mongo"
+	"github.com/jinzhu/gorm"
 	"pekabeta/internal/application"
 	"pekabeta/internal/infrastructure/persistence"
 	"pekabeta/internal/interfaces/rest"
@@ -15,7 +15,7 @@ import (
 
 // Injectors from wire.go:
 
-func CreateApi(db *mongo.Database) *rest.Api {
+func CreateApi(db *gorm.DB) *rest.Api {
 	customerRepository := persistence.NewCustomerRepository(db)
 	customerInteractor := application.NewCustomerInteractor(customerRepository)
 	productRepository := persistence.NewProductRepository(db)

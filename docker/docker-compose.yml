@@ -2,15 +2,14 @@ version: "3"
 
 services:
   database:
-    container_name: mongodb
+    container_name: mysql
     restart: always
-    image: mongo:latest
+    image: mysql:5.7
     environment:
-      MONGO_INITDB_DATABASE: pekabeta
-      MONGO_INITDB_ROOT_USERNAME: username
-      MONGO_INITDB_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: test_pekabeta
+      MYSQL_ROOT_PASSWORD: password
     ports:
-      - 27017:27017
+      - 6603:3306
   server:
     container_name: api
     restart: always

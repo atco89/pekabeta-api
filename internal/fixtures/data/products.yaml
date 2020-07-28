@@ -1,0 +1,10 @@
+- id: RAW=UUID()
+  name: Mineralna voda NG Prolom 1,5l
+  description: Prirodna mineralna Prolom voda sa niskim sadrzajem rastvorivih mineralnih materija - negazirana 1,5l
+  product_group: drinks
+  measurment_unit: piece
+  price: 59.99
+  image_path: http://d3el976p2k4mvu.cloudfront.net/medias/sys_master/hb3/h43/8824394678302.png
+  in_stock: 936
+  created_at: RAW=NOW()
+  updated_at: RAW=NOW()

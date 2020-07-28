@@ -3,8 +3,9 @@ package domain
 import "github.com/google/uuid"
 
 type Invoice struct {
-	OrderId       uuid.UUID     `bson:"order_id" json:"order_id"`
-	Amount        float32       `bson:"amount" json:"amount"`
-	PaymentStatus PaymentStatus `bson:"payment_status" json:"payment_status"`
-	PaymentType   PaymentType   `bson:"payment_type" json:"payment_type"`
+	Base
+	OrderId       uuid.UUID     `json:"order_id" gorm:"column:order_id;type:char(36);not null"`
+	Amount        float32       `json:"amount" gorm:"column:amount;type:decimal(10,2);not null"`
+	PaymentStatus PaymentStatus `json:"payment_status" gorm:"column:payment_status;type:varchar(255);not null"`
+	PaymentType   PaymentType   `json:"payment_type" gorm:"column:payment_type;type:varchar(255);not null"`
 }

@@ -2,15 +2,15 @@ package persistence
 
 import (
 	"github.com/google/uuid"
-	"go.mongodb.org/mongo-driver/mongo"
+	"github.com/jinzhu/gorm"
 	"pekabeta/internal/domain"
 )
 
 type OrderRepository struct {
-	Conn *mongo.Database
+	Conn *gorm.DB
 }
 
-func NewOrderRepository(conn *mongo.Database) *OrderRepository {
+func NewOrderRepository(conn *gorm.DB) *OrderRepository {
 	return &OrderRepository{Conn: conn}
 }
 

@@ -1,25 +1,21 @@
 package database
 
 import (
-	"context"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"log"
+	"os"
 )
 
-//noinspection ALL
-var SCHEMA = "pekabeta"
-var DSN = "mongodb://username:secret@database:27017"
+func InitDb() *gorm.DB {
+	driver := os.Getenv("DRIVER")
+	dsn := os.Getenv("DSN")
 
-func InitDb() *mongo.Database {
-	// Set client options
-	clientOptions := options.Client().ApplyURI(DSN)
+	db, err := gorm.Open(driver, dsn)
 
-	// Connect to MongoDB
-	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	return client.Database(SCHEMA)
+	return db
 }

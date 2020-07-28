@@ -1,9 +1,10 @@
 package domain
 
 type Customer struct {
-	FirstName   string `bson:"first_name" json:"first_name"`
-	LastName    string `bson:"last_name" json:"last_name"`
-	Email       string `bson:"email" json:"email"`
-	PhoneNumber string `bson:"phone_number" json:"phone_number"`
-	Password    string `bson:"password" json:"password"`
+	Base
+	FirstName   string `json:"first_name" gorm:"column:first_name;type:varchar(255);not null"`
+	LastName    string `json:"last_name" gorm:"column:last_name;type:varchar(255);not null"`
+	Email       string `json:"email" gorm:"column:email;type:varchar(255);not null"`
+	PhoneNumber string `json:"phone_number" gorm:"column:phone_number;type:varchar(16);not null"`
+	Password    string `json:"password" gorm:"column:password;type:char(60);not null"`
 }

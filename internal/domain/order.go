@@ -3,8 +3,8 @@ package domain
 import "github.com/google/uuid"
 
 type Order struct {
-	CustomerID   uuid.UUID    `bson:"customer_id" json:"customer_id"`
-	OrderItems   []OrderItem  `bson:"order_items" json:"order_items"`
-	OrderStatus  OrderStatus  `bson:"order_status" json:"order_status"`
-	ShippingType ShippingType `bson:"shipping_type" json:"shipping_type"`
+	Base
+	CustomerID   uuid.UUID    `json:"customer_id" gorm:"column:customer_id;type:char(36);not null"`
+	OrderStatus  OrderStatus  `json:"order_status" gorm:"column:order_status;type:varchar(255);not null"`
+	ShippingType ShippingType `json:"shipping_type" gorm:"column:shipping_type;type:varchar(255);not null"`
 }

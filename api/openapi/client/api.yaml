@@ -11,7 +11,7 @@ servers:
     description: Server description.
 paths:
   /customer/registration:
-    $ref: "./routes/customer.yaml"
+    $ref: "./routes/products.yaml"
   /customer/login:
     $ref: "./routes/login.yaml"
   /customer/{id}:

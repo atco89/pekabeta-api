@@ -4,7 +4,7 @@ package main
 
 import (
 	"github.com/google/wire"
-	"go.mongodb.org/mongo-driver/mongo"
+	"github.com/jinzhu/gorm"
 	"pekabeta/internal/application"
 	"pekabeta/internal/domain/repository"
 	"pekabeta/internal/infrastructure/persistence"
@@ -18,7 +18,7 @@ var repositorySet = wire.NewSet(
 	persistence.NewInvoiceRepository,
 )
 
-func CreateApi(db *mongo.Database) *rest.Api {
+func CreateApi(db *gorm.DB) *rest.Api {
 	panic(wire.Build(
 		repositorySet,
 
