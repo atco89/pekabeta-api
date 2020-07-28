@@ -1,0 +1,19 @@
+type: object
+properties:
+  customer_id:
+    type: string
+    format: uuid
+  order_items:
+    type: array
+    items:
+      $ref: "./schemas.yaml#/OrderItem"
+    minItems: 1
+  order_status:
+    $ref: "./schemas.yaml#/OrderStatus"
+  shipping_type:
+    $ref: "./schemas.yaml#/ShippingType"
+required:
+  - customer_id
+  - order_items
+  - order_status
+  - shipping_type

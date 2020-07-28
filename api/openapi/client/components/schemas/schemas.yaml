@@ -1,0 +1,38 @@
+Customer:
+  $ref: "./Customer.yaml"
+Login:
+  $ref: "./Login.yaml"
+Product:
+  $ref: "./Product.yaml"
+Products:
+  type: array
+  items:
+    $ref: "./Product.yaml"
+Order:
+  $ref: "./Order.yaml"
+Orders:
+  type: array
+  items:
+    $ref: "./Order.yaml"
+Invoice:
+  $ref: "./Invoice.yaml"
+Invoices:
+  type: array
+  items:
+    $ref: "./Invoice.yaml"
+MeasurmentUnit:
+  $ref: "./MeasurmentUnit.yaml"
+OrderItem:
+  $ref: "./OrderItem.yaml"
+OrderStatus:
+  $ref: "./OrderStatus.yaml"
+PaymentStatus:
+  $ref: "./PaymentStatus.yaml"
+PaymentType:
+  $ref: "./PaymentType.yaml"
+ProductGroup:
+  $ref: "./ProductGroup.yaml"
+ShippingType:
+  $ref: "./ShippingType.yaml"
+Error:
+  $ref: "./Error.yaml"

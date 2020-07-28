@@ -1,0 +1,27 @@
+type: object
+properties:
+  name:
+    type: string
+  description:
+    type: string
+    nullable: true
+  product_group:
+    $ref: "./schemas.yaml#/ProductGroup"
+  measurment_unit:
+    $ref: "./schemas.yaml#/MeasurmentUnit"
+  price:
+    type: number
+    format: float
+  image_path:
+    type: string
+    format: url
+    nullable: true
+  in_stock:
+    type: number
+    format: float
+required:
+  - name
+  - product_group
+  - measurment_unit
+  - price
+  - in_stock

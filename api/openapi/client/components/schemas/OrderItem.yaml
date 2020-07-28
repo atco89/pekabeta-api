@@ -1,0 +1,11 @@
+type: object
+properties:
+  product_id:
+    type: string
+    format: uuid
+  quantity:
+    type: number
+    format: float
+required:
+  - product_id
+  - quantity

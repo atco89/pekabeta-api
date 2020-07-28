@@ -1,0 +1,30 @@
+openapi: "3.0.0"
+info:
+  title: Pekabeta Shop API
+  version: 1.0.0
+  contact:
+    name: Pekabeta Shop API
+    url: http://www.example.com
+    email: aleksandar.rakic@yahoo.com
+servers:
+  - url: "http://localhost:3000/api/1.0"
+    description: Server description.
+paths:
+  /customer/registration:
+    $ref: "./routes/customer.yaml"
+  /customer/login:
+    $ref: "./routes/login.yaml"
+  /customer/{id}:
+    $ref: "./routes/customer_edit.yaml"
+  /product:
+    $ref: "./routes/product.yaml"
+  /product/{id}:
+    $ref: "./routes/product_edit.yaml"
+  /order:
+    $ref: "./routes/order.yaml"
+  /order/{id}:
+    $ref: "./routes/order_edit.yaml"
+  /invoice:
+    $ref: "./routes/invoice.yaml"
+  /invoice/{id}:
+    $ref: "./routes/invoice_edit.yaml"

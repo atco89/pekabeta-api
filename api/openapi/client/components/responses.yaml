@@ -1,0 +1,78 @@
+CustomerResponse:
+  description: OK
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/schemas.yaml#/Customer"
+ProductResponse:
+  description: OK
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/schemas.yaml#/Product"
+ProductsResponse:
+  description: OK
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/schemas.yaml#/Products"
+OrderResponse:
+  description: OK
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/schemas.yaml#/Order"
+OrdersResponse:
+  description: OK
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/schemas.yaml#/Orders"
+InvoiceResponse:
+  description: OK
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/schemas.yaml#/Invoice"
+InvoicesResponse:
+  description: OK
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/schemas.yaml#/Invoices"
+BadRequest:
+  description: Bad request
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/schemas.yaml#/Error"
+Unauthenticated:
+  description: Unauthenticated
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/schemas.yaml#/Error"
+Unauthorized:
+  description: Unauthorized
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/schemas.yaml#/Error"
+NotFound:
+  description: The specified resource was not found
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/schemas.yaml#/Error"
+Conflict:
+  description: The specified resource already exists
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/schemas.yaml#/Error"
+InternalServerError:
+  description: Internal server error
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/schemas.yaml#/Error"

@@ -1,0 +1,13 @@
+type: string
+enum:
+  - drinks
+  - meat
+  - fruit
+  - milk
+  - groceries
+  - bakery
+  - cookies
+  - frozen
+  - chemistry
+  - hygiene
+  - organic

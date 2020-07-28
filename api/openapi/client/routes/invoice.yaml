@@ -1,0 +1,15 @@
+get:
+  summary: Retrieve invoices.
+  description: Used to retrieve invoices for certain customer id.
+  operationId: RetrieveInvoices
+  responses:
+    200:
+      $ref: "../components/responses.yaml#/InvoicesResponse"
+    401:
+      $ref: "../components/responses.yaml#/Unauthenticated"
+    403:
+      $ref: "../components/responses.yaml#/Unauthorized"
+    404:
+      $ref: "../components/responses.yaml#/NotFound"
+    500:
+      $ref: "../components/responses.yaml#/InternalServerError"

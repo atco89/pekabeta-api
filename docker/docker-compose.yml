@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  database:
+    container_name: mongodb
+    restart: always
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_DATABASE: food_shop
+      MONGO_INITDB_ROOT_USERNAME: username
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    ports:
+      - 27017:27017
+  server:
+    container_name: api
+    restart: always
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - ../:/app
+    ports:
+      - 3000:3000
+    links:
+      - database
+    depends_on:
+      - database

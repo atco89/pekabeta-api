@@ -1,0 +1,7 @@
+type: string
+enum:
+  - cash
+  - debit_card
+  - credit_card
+  - personal_cheque
+  - transfer

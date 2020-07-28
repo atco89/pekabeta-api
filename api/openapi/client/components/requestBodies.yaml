@@ -1,0 +1,18 @@
+CustomerRequest:
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/schemas.yaml#/Customer"
+  required: true
+CustomerLoginRequest:
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/schemas.yaml#/Login"
+  required: true
+OrderRequest:
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/schemas.yaml#/Order"
+  required: true

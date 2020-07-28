@@ -1,0 +1,8 @@
+type: string
+enum:
+  - approved
+  - packed
+  - ready_to_ship
+  - invoiced
+  - on_hold
+  - cancelled

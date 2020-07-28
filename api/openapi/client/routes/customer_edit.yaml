@@ -1,0 +1,19 @@
+patch:
+  summary: Modify customer.
+  description: Used to modify customer profile.
+  operationId: ModifyCustomer
+  parameters:
+    - $ref: "../components/parameters.yaml#/id"
+  requestBody:
+    $ref: "../components/requestBodies.yaml#/CustomerRequest"
+  responses:
+    200:
+      $ref: "../components/responses.yaml#/CustomerResponse"
+    401:
+      $ref: "../components/responses.yaml#/Unauthenticated"
+    403:
+      $ref: "../components/responses.yaml#/Unauthorized"
+    404:
+      $ref: "../components/responses.yaml#/NotFound"
+    500:
+      $ref: "../components/responses.yaml#/InternalServerError"

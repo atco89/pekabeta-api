@@ -1,0 +1,30 @@
+{
+  "name": "food-shop-service",
+  "version": "1.0.0",
+  "description": "Food Shop Service",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib"
+  },
+  "scripts": {
+    "generator": "openapi-generator",
+    "openapi": "openapi",
+    "server": "live-server --open=./docs --watch=./docs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "food",
+    "shop",
+    "api",
+    "openapi",
+    "spec"
+  ],
+  "author": "Aleksandar Rakić",
+  "license": "MIT",
+  "dependencies": {
+    "@openapitools/openapi-generator-cli": "^1.0.13-4.3.1",
+    "@redocly/openapi-cli": "^0.12.16",
+    "live-server": "^1.2.1"
+  }
+}

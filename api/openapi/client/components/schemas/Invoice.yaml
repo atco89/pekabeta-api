@@ -1,0 +1,17 @@
+type: object
+properties:
+  order_id:
+    type: string
+    format: uuid
+  amount:
+    type: number
+    format: float
+  payment_type:
+    $ref: "./schemas.yaml#/PaymentType"
+  payment_status:
+    $ref: "./schemas.yaml#/PaymentStatus"
+required:
+  - order_id
+  - amount
+  - payment_type
+  - payment_status
