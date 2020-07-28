@@ -5,6 +5,52 @@
   measurment_unit: piece
   price: 59.99
   image_path: http://d3el976p2k4mvu.cloudfront.net/medias/sys_master/hb3/h43/8824394678302.png
-  in_stock: 936
+  in_stock: RAW=RIGHT(RAND(),3)
+  created_at: RAW=NOW()
+  updated_at: RAW=NOW()
+
+- id: RAW=UUID()
+  name: Knjaz Milos pet 1.75l
+  description: >
+    Gazirana prirodna mineralna voda - natrijumova magnezijumova bikarbonatna fluoridna ugljeno kisela prirodna
+    mineralna voda sa dodatnim ugljen-dioksidom.
+  product_group: drinks
+  measurment_unit: piece
+  price: 45.99
+  image_path: http://d3el976p2k4mvu.cloudfront.net/medias/sys_master/hd6/h67/8862796939294.jpg
+  in_stock: RAW=RIGHT(RAND(),3)
+  created_at: RAW=NOW()
+  updated_at: RAW=NOW()
+
+- id: RAW=UUID()
+  name: Coca-Cola limenka 0,33l
+  description: Osvezavajuce bezalkoholno pice - Coca Cola
+  product_group: drinks
+  measurment_unit: piece
+  price: 54.99
+  image_path: http://d3el976p2k4mvu.cloudfront.net/medias/sys_master/h63/h37/8850328027166.png
+  in_stock: RAW=RIGHT(RAND(),3)
+  created_at: RAW=NOW()
+  updated_at: RAW=NOW()
+
+- id: RAW=UUID()
+  name: Sok pomorandza 100% Nectar Life 1l
+  description: Mutan vocni sok od pomorandze
+  product_group: drinks
+  measurment_unit: piece
+  price: 169.99
+  image_path: http://d3el976p2k4mvu.cloudfront.net/medias/sys_master/ha4/h5a/8888566186014.png
+  in_stock: RAW=RIGHT(RAND(),3)
+  created_at: RAW=NOW()
+  updated_at: RAW=NOW()
+
+- id: RAW=UUID()
+  name: Kafa mlevena Grand Gold 500g
+  description: Grand Gold 500g
+  product_group: drinks
+  measurment_unit: piece
+  price: 599.99
+  image_path: http://d3el976p2k4mvu.cloudfront.net/medias/sys_master/h58/hb0/8869280776222.png
+  in_stock: RAW=RIGHT(RAND(),3)
   created_at: RAW=NOW()
   updated_at: RAW=NOW()

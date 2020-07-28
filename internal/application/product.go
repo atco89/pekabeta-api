@@ -16,10 +16,10 @@ func NewProductInteractor(repo repository.ProductRepository) *ProductInteractor 
 	}
 }
 
-func (p ProductInteractor) RetrieveOne(id uuid.UUID) (*domain.Product, error) {
+func (p ProductInteractor) RetrieveOne(id uuid.UUID) (domain.Product, error) {
 	return p.repository.RetrieveOne(id)
 }
 
-func (p ProductInteractor) RetrieveAll() (*[]domain.Product, error) {
+func (p ProductInteractor) RetrieveAll() ([]domain.Product, error) {
 	return p.repository.RetrieveAll()
 }

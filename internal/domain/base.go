@@ -7,10 +7,10 @@ import (
 )
 
 type Base struct {
-	ID        uuid.UUID  `gorm:"column:id;type:char(36);primary_key;not null"`
-	CreatedAt time.Time  `gorm:"column:created_at;type:timestamp;not null"`
-	UpdatedAt time.Time  `gorm:"column:updated_at;type:timestamp;not null;default:current_timestamp"`
-	DeletedAt *time.Time `gorm:"column:deleted_at;type:timestamp;not null;default:current_timestamp"`
+	ID        uuid.UUID  `json:"id" gorm:"column:id;type:char(36);primary_key;not null"`
+	CreatedAt time.Time  `json:"created_at" gorm:"column:created_at;type:datetime;not null"`
+	UpdatedAt time.Time  `json:"updated_at" gorm:"column:updated_at;type:datetime;not null"`
+	DeletedAt *time.Time `json:"deleted_at" gorm:"column:deleted_at;type:datetime;null"`
 }
 
 func (b *Base) BeforeCreate(scope *gorm.Scope) error {
