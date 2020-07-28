@@ -7,6 +7,7 @@ import (
 	"log"
 )
 
+//noinspection ALL
 var SCHEMA = "pekabeta"
 var DSN = "mongodb://username:secret@database:27017"
 

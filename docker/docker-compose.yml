@@ -6,7 +6,7 @@ services:
     restart: always
     image: mongo:latest
     environment:
-      MONGO_INITDB_DATABASE: food_shop
+      MONGO_INITDB_DATABASE: pekabeta
       MONGO_INITDB_ROOT_USERNAME: username
       MONGO_INITDB_ROOT_PASSWORD: secret
     ports:

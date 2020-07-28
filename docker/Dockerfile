@@ -13,4 +13,4 @@ RUN go get github.com/google/wire/cmd/wire
 
 RUN wire
 
-ENTRYPOINT CompileDaemon --build="go build -o /usr/local/bin/androidservice ." --command=/usr/local/bin/androidservice
+ENTRYPOINT CompileDaemon --build="go build -o /usr/local/bin/pekabeta ." --command=/usr/local/bin/pekabeta

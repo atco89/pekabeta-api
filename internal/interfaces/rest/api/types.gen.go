@@ -203,4 +203,3 @@ type ModifyCustomerJSONRequestBody CustomerRequest
 
 // CreateOrderRequestBody defines body for CreateOrder for application/json ContentType.
 type CreateOrderJSONRequestBody OrderRequest
-

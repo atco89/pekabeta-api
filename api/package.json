@@ -1,7 +1,7 @@
 {
-  "name": "food-shop-service",
+  "name": "pekabeta-api",
   "version": "1.0.0",
-  "description": "Food Shop Service",
+  "description": "Pekabeta Food Shop API",
   "main": "index.js",
   "directories": {
     "doc": "docs",
@@ -14,6 +14,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
+    "pekabeta",
     "food",
     "shop",
     "api",
