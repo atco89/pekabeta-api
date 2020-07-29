@@ -16,10 +16,10 @@ func NewInvoiceInteractor(repo repository.InvoiceRepository) *InvoiceInteractor 
 	}
 }
 
-func (i InvoiceInteractor) RetrieveOne(id uuid.UUID) (*domain.Invoice, error) {
-	return i.repository.RetrieveOne(id)
+func (i InvoiceInteractor) RetrieveOne(id uuid.UUID, customerId uuid.UUID) (domain.Invoice, error) {
+	return i.repository.RetrieveOne(id, customerId)
 }
 
-func (i InvoiceInteractor) RetrieveAll() (*[]domain.Invoice, error) {
-	return i.repository.RetrieveAll()
+func (i InvoiceInteractor) RetrieveAll(customerId uuid.UUID) ([]domain.Invoice, error) {
+	return i.repository.RetrieveAll(customerId)
 }

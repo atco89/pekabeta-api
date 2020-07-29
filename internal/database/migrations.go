@@ -13,4 +13,8 @@ func RunMigrations(db *gorm.DB) {
 		domain.OrderItem{},
 		domain.Invoice{},
 	)
+
+	db.Model(domain.Customer{}).
+		AddUniqueIndex("uq_customers_email", "email").
+		AddUniqueIndex("uq_customers_phone_number", "phone_number")
 }

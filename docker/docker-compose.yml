@@ -5,6 +5,8 @@ services:
     container_name: mysql
     restart: always
     image: mysql:5.7
+    volumes:
+      - ./database/my.cnf:/etc/alternatives/my.cnf
     environment:
       MYSQL_DATABASE: test_pekabeta
       MYSQL_ROOT_PASSWORD: password

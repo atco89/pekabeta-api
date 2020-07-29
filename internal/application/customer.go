@@ -1,7 +1,6 @@
 package application
 
 import (
-	"github.com/google/uuid"
 	"pekabeta/internal/domain"
 	"pekabeta/internal/domain/repository"
 )
@@ -20,10 +19,10 @@ func (c CustomerInteractor) Registration(customer *domain.Customer) error {
 	return c.repository.Registration(customer)
 }
 
-func (c CustomerInteractor) Login(login domain.Login) (*domain.Customer, error) {
+func (c CustomerInteractor) Login(login domain.Login) (domain.Customer, error) {
 	return c.repository.Login(login)
 }
 
-func (c CustomerInteractor) Update(id uuid.UUID, customer *domain.Customer) error {
-	return c.repository.Update(id, customer)
+func (c CustomerInteractor) Modify(customer domain.Customer) error {
+	return c.repository.Modify(customer)
 }
