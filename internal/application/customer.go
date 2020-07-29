@@ -19,10 +19,10 @@ func (c CustomerInteractor) Registration(customer *domain.Customer) error {
 	return c.repository.Registration(customer)
 }
 
-func (c CustomerInteractor) Login(login domain.Login) (domain.Customer, error) {
+func (c CustomerInteractor) Login(login domain.Login) (*domain.Customer, error) {
 	return c.repository.Login(login)
 }
 
-func (c CustomerInteractor) Modify(customer domain.Customer) error {
+func (c CustomerInteractor) Modify(customer *domain.Customer) error {
 	return c.repository.Modify(customer)
 }
