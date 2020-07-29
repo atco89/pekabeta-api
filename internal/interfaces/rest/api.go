@@ -53,7 +53,6 @@ func (a Api) CustomerRegistration(ctx echo.Context) error {
 		ctx.Response().WriteHeader(http.StatusInternalServerError)
 		return nil
 	}
-
 	ctx.Response().WriteHeader(http.StatusCreated)
 	return nil
 }
@@ -74,7 +73,6 @@ func (a Api) CustomerLogin(ctx echo.Context) error {
 		ctx.Response().WriteHeader(http.StatusInternalServerError)
 		return err
 	}
-
 	return ctx.JSON(http.StatusOK, customer)
 }
 
@@ -107,11 +105,9 @@ func (a Api) ModifyCustomer(ctx echo.Context, id api.Id) error {
 			ctx.Response().WriteHeader(http.StatusNotFound)
 			return err
 		}
-
 		ctx.Response().WriteHeader(http.StatusInternalServerError)
 		return err
 	}
-
 	return ctx.JSON(http.StatusOK, modifiedCustomer)
 }
 
@@ -121,11 +117,9 @@ func (a Api) RetrieveProduct(ctx echo.Context, id api.Id) error {
 		if gorm.IsRecordNotFoundError(err) {
 			ctx.Response().WriteHeader(http.StatusNotFound)
 		}
-
 		ctx.Response().WriteHeader(http.StatusInternalServerError)
 		return err
 	}
-
 	return ctx.JSON(http.StatusOK, customer)
 }
 
@@ -135,11 +129,9 @@ func (a Api) RetrieveProducts(ctx echo.Context) error {
 		if gorm.IsRecordNotFoundError(err) {
 			ctx.Response().WriteHeader(http.StatusNotFound)
 		}
-
 		ctx.Response().WriteHeader(http.StatusInternalServerError)
 		return err
 	}
-
 	return ctx.JSON(http.StatusOK, customer)
 }
 
@@ -153,6 +145,7 @@ func (a Api) CreateOrder(ctx echo.Context) error {
 	orderDetails := &domain.Order{
 		CustomerID:   uuid.MustParse(order.CustomerId),
 		OrderStatus:  domain.OrderStatus(order.OrderStatus),
+		OrderItems:   DecodeOrderItems(order.OrderItems),
 		ShippingType: domain.ShippingType(order.ShippingType),
 	}
 

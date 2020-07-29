@@ -10,7 +10,6 @@ func RunMigrations(db *gorm.DB) {
 		domain.Customer{},
 		domain.Product{},
 		domain.Order{},
-		domain.OrderItem{},
 		domain.Invoice{},
 	)
 
@@ -18,5 +17,9 @@ func RunMigrations(db *gorm.DB) {
 		AddUniqueIndex("uq_customers_email", "email").
 		AddUniqueIndex("uq_customers_phone_number", "phone_number")
 
-	db.Model(domain.Order{}).AddForeignKey("customer_id", "customers(id)", "NO ACTION", "CASCADE")
+	db.Model(domain.Order{}).
+		AddForeignKey("customer_id", "customers(id)", "NO ACTION", "CASCADE")
+
+	db.Model(domain.Invoice{}).
+		AddForeignKey("order_id", "orders(id)", "NO ACTION", "CASCADE")
 }
