@@ -6,7 +6,7 @@ import (
 )
 
 type OrderRepository interface {
-	Store(order domain.Order) error
-	RetrieveOne(id uuid.UUID, customerId uuid.UUID) (domain.Order, error)
-	RetrieveAll(customerId uuid.UUID) ([]domain.Order, error)
+	Store(order *domain.Order) error
+	RetrieveOne(id uuid.UUID, customerId uuid.UUID) (*domain.Order, error)
+	RetrieveAll(customerId uuid.UUID) (*[]domain.Order, error)
 }

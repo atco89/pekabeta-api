@@ -144,15 +144,49 @@ func (a Api) RetrieveProducts(ctx echo.Context) error {
 }
 
 func (a Api) CreateOrder(ctx echo.Context) error {
-	panic("implement me")
+	order := &api.Order{}
+	if err := ctx.Bind(order); err != nil {
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return err
+	}
+
+	orderDetails := &domain.Order{
+		CustomerID:   uuid.MustParse(order.CustomerId),
+		OrderStatus:  domain.OrderStatus(order.OrderStatus),
+		ShippingType: domain.ShippingType(order.ShippingType),
+	}
+
+	if err := a.order.Store(orderDetails); err != nil {
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return err
+	}
+	return ctx.JSON(http.StatusCreated, orderDetails)
 }
 
 func (a Api) RetrieveOrder(ctx echo.Context, id api.Id) error {
-	panic("implement me")
+	customerId := ctx.Request().Header.Get("Authorization")
+	order, err := a.order.RetrieveOne(uuid.MustParse(string(id)), uuid.MustParse(customerId))
+	if err != nil {
+		if gorm.IsRecordNotFoundError(err) {
+			ctx.Response().WriteHeader(http.StatusNotFound)
+		}
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return err
+	}
+	return ctx.JSON(http.StatusOK, order)
 }
 
 func (a Api) RetrieveOrders(ctx echo.Context) error {
-	panic("implement me")
+	customerId := ctx.Request().Header.Get("Authorization")
+	orders, err := a.order.RetrieveAll(uuid.MustParse(customerId))
+	if err != nil {
+		if gorm.IsRecordNotFoundError(err) {
+			ctx.Response().WriteHeader(http.StatusNotFound)
+		}
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return err
+	}
+	return ctx.JSON(http.StatusOK, orders)
 }
 
 func (a Api) RetrieveInvoice(ctx echo.Context, id api.Id) error {

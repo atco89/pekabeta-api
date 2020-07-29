@@ -14,12 +14,12 @@ func NewOrderRepository(conn *gorm.DB) *OrderRepository {
 	return &OrderRepository{Conn: conn}
 }
 
-func (o OrderRepository) Store(order domain.Order) error {
+func (o OrderRepository) Store(order *domain.Order) error {
 	return o.Conn.Create(order).Error
 }
 
-func (o OrderRepository) RetrieveOne(id uuid.UUID, customerId uuid.UUID) (domain.Order, error) {
-	var order domain.Order
+func (o OrderRepository) RetrieveOne(id uuid.UUID, customerId uuid.UUID) (*domain.Order, error) {
+	order := &domain.Order{}
 	err := o.Conn.First(&order, domain.Order{
 		Base: domain.Base{
 			ID: id,
@@ -29,10 +29,8 @@ func (o OrderRepository) RetrieveOne(id uuid.UUID, customerId uuid.UUID) (domain
 	return order, err
 }
 
-func (o OrderRepository) RetrieveAll(customerId uuid.UUID) ([]domain.Order, error) {
-	var orders []domain.Order
-	err := o.Conn.Find(&orders, domain.Order{
-		CustomerID: customerId,
-	}).Error
+func (o OrderRepository) RetrieveAll(customerId uuid.UUID) (*[]domain.Order, error) {
+	orders := &[]domain.Order{}
+	err := o.Conn.Find(&orders, domain.Order{CustomerID: customerId}).Error
 	return orders, err
 }

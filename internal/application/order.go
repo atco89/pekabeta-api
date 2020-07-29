@@ -16,14 +16,14 @@ func NewOrderInteractor(repo repository.OrderRepository) *OrderInteractor {
 	}
 }
 
-func (o OrderInteractor) Store(order domain.Order) error {
+func (o OrderInteractor) Store(order *domain.Order) error {
 	return o.repository.Store(order)
 }
 
-func (o OrderInteractor) RetrieveOne(id uuid.UUID, customerId uuid.UUID) (domain.Order, error) {
+func (o OrderInteractor) RetrieveOne(id uuid.UUID, customerId uuid.UUID) (*domain.Order, error) {
 	return o.repository.RetrieveOne(id, customerId)
 }
 
-func (o OrderInteractor) RetrieveAll(customerId uuid.UUID) ([]domain.Order, error) {
+func (o OrderInteractor) RetrieveAll(customerId uuid.UUID) (*[]domain.Order, error) {
 	return o.repository.RetrieveAll(customerId)
 }

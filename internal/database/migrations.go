@@ -17,4 +17,6 @@ func RunMigrations(db *gorm.DB) {
 	db.Model(domain.Customer{}).
 		AddUniqueIndex("uq_customers_email", "email").
 		AddUniqueIndex("uq_customers_phone_number", "phone_number")
+
+	db.Model(domain.Order{}).AddForeignKey("customer_id", "customers(id)", "NO ACTION", "CASCADE")
 }
