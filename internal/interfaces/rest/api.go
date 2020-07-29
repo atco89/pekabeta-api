@@ -3,7 +3,6 @@ package rest
 import (
 	"github.com/labstack/echo/v4"
 	"golang.org/x/crypto/bcrypt"
-	"log"
 	"net/http"
 	"pekabeta/internal/application"
 	"pekabeta/internal/domain"
@@ -38,7 +37,8 @@ func (a Api) CustomerRegistration(ctx echo.Context) error {
 
 	password, err := bcrypt.GenerateFromPassword([]byte(customer.Password), bcrypt.MinCost)
 	if err != nil {
-		log.Println(err)
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return nil
 	}
 
 	if err := a.customer.Registration(&domain.Customer{
