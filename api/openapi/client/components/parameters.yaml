@@ -6,3 +6,25 @@ id:
   schema:
     type: string
     format: uuid
+email:
+  name: email
+  in: path
+  required: true
+  description: Email as path.
+  schema:
+    type: string
+    format: email
+phone:
+  name: phone
+  in: path
+  required: true
+  description: Phone number as path.
+  schema:
+    type: string
+group:
+  name: group
+  in: path
+  required: true
+  description: Product group as path.
+  schema:
+    type: string

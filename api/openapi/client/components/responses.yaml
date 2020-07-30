@@ -40,6 +40,12 @@ InvoicesResponse:
     application/json:
       schema:
         $ref: "./schemas/schemas.yaml#/Invoices"
+ValidationResponse:
+  description: OK
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/schemas.yaml#/Validation"
 BadRequest:
   description: Bad request
   content:

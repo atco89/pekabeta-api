@@ -1,0 +1,19 @@
+post:
+  summary: Customer registration.
+  description: Used to register new customer.
+  operationId: CustomerRegistration
+  requestBody:
+    $ref: "../../components/requestBodies.yaml#/CustomerRequest"
+  responses:
+    201:
+      description: Created
+    400:
+      $ref: "../../components/responses.yaml#/BadRequest"
+    401:
+      $ref: "../../components/responses.yaml#/Unauthenticated"
+    403:
+      $ref: "../../components/responses.yaml#/Unauthorized"
+    409:
+      $ref: "../../components/responses.yaml#/Conflict"
+    500:
+      $ref: "../../components/responses.yaml#/InternalServerError"

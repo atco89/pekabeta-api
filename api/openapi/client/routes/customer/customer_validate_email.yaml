@@ -1,0 +1,17 @@
+get:
+  summary: Check if email exists in database.
+  description: Used to check if email exists in database.
+  operationId: ValidateEmail
+  parameters:
+    - $ref: "../../components/parameters.yaml#/email"
+  responses:
+    200:
+      $ref: "../../components/responses.yaml#/ValidationResponse"
+    401:
+      $ref: "../../components/responses.yaml#/Unauthenticated"
+    403:
+      $ref: "../../components/responses.yaml#/Unauthorized"
+    404:
+      $ref: "../../components/responses.yaml#/NotFound"
+    500:
+      $ref: "../../components/responses.yaml#/InternalServerError"

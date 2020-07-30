@@ -1,0 +1,17 @@
+get:
+  summary: Retrieve product details.
+  description: Used to retrieve product details for specified product id.
+  operationId: RetrieveProduct
+  parameters:
+    - $ref: "../../components/parameters.yaml#/id"
+  responses:
+    200:
+      $ref: "../../components/responses.yaml#/ProductResponse"
+    401:
+      $ref: "../../components/responses.yaml#/Unauthenticated"
+    403:
+      $ref: "../../components/responses.yaml#/Unauthorized"
+    404:
+      $ref: "../../components/responses.yaml#/NotFound"
+    500:
+      $ref: "../../components/responses.yaml#/InternalServerError"

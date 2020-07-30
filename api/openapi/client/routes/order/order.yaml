@@ -1,0 +1,34 @@
+post:
+  summary: Create order.
+  description: Used to create new order.
+  operationId: CreateOrder
+  requestBody:
+    $ref: "../../components/requestBodies.yaml#/OrderRequest"
+  responses:
+    201:
+      description: Created
+    400:
+      $ref: "../../components/responses.yaml#/BadRequest"
+    401:
+      $ref: "../../components/responses.yaml#/Unauthenticated"
+    403:
+      $ref: "../../components/responses.yaml#/Unauthorized"
+    409:
+      $ref: "../../components/responses.yaml#/Conflict"
+    500:
+      $ref: "../../components/responses.yaml#/InternalServerError"
+get:
+  summary: Retrieve orders.
+  description: Used to retrieve all orders for certain customer.
+  operationId: RetrieveOrders
+  responses:
+    200:
+      $ref: "../../components/responses.yaml#/OrdersResponse"
+    401:
+      $ref: "../../components/responses.yaml#/Unauthenticated"
+    403:
+      $ref: "../../components/responses.yaml#/Unauthorized"
+    404:
+      $ref: "../../components/responses.yaml#/NotFound"
+    500:
+      $ref: "../../components/responses.yaml#/InternalServerError"

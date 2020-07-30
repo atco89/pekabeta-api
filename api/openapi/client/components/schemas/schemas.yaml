@@ -34,5 +34,7 @@ ProductGroup:
   $ref: "./ProductGroup.yaml"
 ShippingType:
   $ref: "./ShippingType.yaml"
+Validation:
+  $ref: "./Validation.yaml"
 Error:
   $ref: "./Error.yaml"

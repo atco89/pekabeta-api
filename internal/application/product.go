@@ -16,10 +16,14 @@ func NewProductInteractor(repo repository.ProductRepository) *ProductInteractor 
 	}
 }
 
-func (p ProductInteractor) RetrieveOne(id uuid.UUID) (*domain.Product, error) {
-	return p.repository.RetrieveOne(id)
+func (p ProductInteractor) RetrieveAll() (*[]domain.Product, error) {
+	panic("implement me")
 }
 
-func (p ProductInteractor) RetrieveAll() (*[]domain.Product, error) {
-	return p.repository.RetrieveAll()
+func (p ProductInteractor) RetrieveProductGroup(productGroup *domain.ProductGroup) (*[]domain.Product, error) {
+	panic("implement me")
+}
+
+func (p ProductInteractor) RetrieveOne(id uuid.UUID) (*domain.Product, error) {
+	panic("implement me")
 }

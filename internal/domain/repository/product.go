@@ -6,6 +6,7 @@ import (
 )
 
 type ProductRepository interface {
-	RetrieveOne(id uuid.UUID) (*domain.Product, error)
 	RetrieveAll() (*[]domain.Product, error)
+	RetrieveProductGroup(productGroup *domain.ProductGroup) (*[]domain.Product, error)
+	RetrieveOne(id uuid.UUID) (*domain.Product, error)
 }

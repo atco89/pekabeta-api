@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  title: Pekabeta Food Shop API
+  title: PEKABETA Food Shop API
   version: 1.0.0
   contact:
     name: Aleksandar Rakić
@@ -9,21 +9,27 @@ servers:
   - url: "http://localhost:3000/api/1.0"
     description: Server description.
 paths:
-  /customer/registration:
-    $ref: "./routes/customer.yaml"
-  /customer/login:
-    $ref: "./routes/login.yaml"
-  /customer/{id}:
-    $ref: "./routes/customer_edit.yaml"
+  /sign-in:
+    $ref: "./routes/customer/login.yaml"
+  /sign-up:
+    $ref: "./routes/customer/customer.yaml"
+  /customer/modify/{id}:
+    $ref: "./routes/customer/customer_edit.yaml"
+  /customer/validate/email/{email}:
+    $ref: "./routes/customer/customer_validate_email.yaml"
+  /customer/validate/phone-number/{phone}:
+    $ref: "./routes/customer/customer_validate_phone_number.yaml"
   /product:
-    $ref: "./routes/product.yaml"
+    $ref: "./routes/product/product.yaml"
   /product/{id}:
-    $ref: "./routes/product_edit.yaml"
+    $ref: "./routes/product/product_edit.yaml"
+  /product/filter/product-group/{group}:
+    $ref: "./routes/product/product_filter_product_group.yaml"
   /order:
-    $ref: "./routes/order.yaml"
+    $ref: "./routes/order/order.yaml"
   /order/{id}:
-    $ref: "./routes/order_edit.yaml"
+    $ref: "./routes/order/order_edit.yaml"
   /invoice:
-    $ref: "./routes/invoice.yaml"
+    $ref: "./routes/invoice/invoice.yaml"
   /invoice/{id}:
-    $ref: "./routes/invoice_edit.yaml"
+    $ref: "./routes/invoice/invoice_edit.yaml"

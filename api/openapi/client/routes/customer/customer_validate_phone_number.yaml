@@ -1,0 +1,17 @@
+get:
+  summary: Check if phone number exists in database.
+  description: Used to check if phone number exists in database.
+  operationId: ValidatePhoneNumber
+  parameters:
+    - $ref: "../../components/parameters.yaml#/phone"
+  responses:
+    200:
+      $ref: "../../components/responses.yaml#/ValidationResponse"
+    401:
+      $ref: "../../components/responses.yaml#/Unauthenticated"
+    403:
+      $ref: "../../components/responses.yaml#/Unauthorized"
+    404:
+      $ref: "../../components/responses.yaml#/NotFound"
+    500:
+      $ref: "../../components/responses.yaml#/InternalServerError"

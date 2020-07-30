@@ -15,14 +15,22 @@ func NewCustomerInteractor(repo repository.CustomerRepository) *CustomerInteract
 	}
 }
 
-func (c CustomerInteractor) Registration(customer *domain.Customer) error {
-	return c.repository.Registration(customer)
+func (c CustomerInteractor) EmailValidation(email *string) (domain.Validation, error) {
+	panic("implement me")
 }
 
-func (c CustomerInteractor) Login(login domain.Login) (*domain.Customer, error) {
-	return c.repository.Login(login)
+func (c CustomerInteractor) PhoneNumberValidation(phoneNumber *string) (domain.Validation, error) {
+	panic("implement me")
+}
+
+func (c CustomerInteractor) Registration(customer *domain.Customer) error {
+	panic("implement me")
+}
+
+func (c CustomerInteractor) Login(login domain.Login) (*domain.Customer, *domain.Error) {
+	panic("implement me")
 }
 
 func (c CustomerInteractor) Modify(customer *domain.Customer) error {
-	return c.repository.Modify(customer)
+	panic("implement me")
 }

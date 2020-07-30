@@ -17,15 +17,15 @@ import (
 
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
-	// Login customer.
-	// (POST /customer/login)
-	CustomerLogin(ctx echo.Context) error
-	// Customer registration.
-	// (POST /customer/registration)
-	CustomerRegistration(ctx echo.Context) error
 	// Modify customer.
-	// (PATCH /customer/{id})
+	// (PATCH /customer/modify/{id})
 	ModifyCustomer(ctx echo.Context, id Id) error
+	// Check if email exists in database.
+	// (GET /customer/validate/email/{email})
+	ValidateEmail(ctx echo.Context, email Email) error
+	// Check if phone number exists in database.
+	// (GET /customer/validate/phone-number/{phone})
+	ValidatePhoneNumber(ctx echo.Context, phone Phone) error
 	// Retrieve invoices.
 	// (GET /invoice)
 	RetrieveInvoices(ctx echo.Context) error
@@ -44,32 +44,23 @@ type ServerInterface interface {
 	// Retrieve all available products.
 	// (GET /product)
 	RetrieveProducts(ctx echo.Context) error
+	// Retrieve product details for specified product group.
+	// (GET /product/filter/product-group/{group})
+	RetrieveProductsByProductGroup(ctx echo.Context, group Group) error
 	// Retrieve product details.
 	// (GET /product/{id})
 	RetrieveProduct(ctx echo.Context, id Id) error
+	// Login customer.
+	// (POST /sign-in)
+	CustomerLogin(ctx echo.Context) error
+	// Customer registration.
+	// (POST /sign-up)
+	CustomerRegistration(ctx echo.Context) error
 }
 
 // ServerInterfaceWrapper converts echo contexts to parameters.
 type ServerInterfaceWrapper struct {
 	Handler ServerInterface
-}
-
-// CustomerLogin converts echo context to params.
-func (w *ServerInterfaceWrapper) CustomerLogin(ctx echo.Context) error {
-	var err error
-
-	// Invoke the callback with all the unmarshalled arguments
-	err = w.Handler.CustomerLogin(ctx)
-	return err
-}
-
-// CustomerRegistration converts echo context to params.
-func (w *ServerInterfaceWrapper) CustomerRegistration(ctx echo.Context) error {
-	var err error
-
-	// Invoke the callback with all the unmarshalled arguments
-	err = w.Handler.CustomerRegistration(ctx)
-	return err
 }
 
 // ModifyCustomer converts echo context to params.
@@ -85,6 +76,38 @@ func (w *ServerInterfaceWrapper) ModifyCustomer(ctx echo.Context) error {
 
 	// Invoke the callback with all the unmarshalled arguments
 	err = w.Handler.ModifyCustomer(ctx, id)
+	return err
+}
+
+// ValidateEmail converts echo context to params.
+func (w *ServerInterfaceWrapper) ValidateEmail(ctx echo.Context) error {
+	var err error
+	// ------------- Path parameter "email" -------------
+	var email Email
+
+	err = runtime.BindStyledParameter("simple", false, "email", ctx.Param("email"), &email)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter email: %s", err))
+	}
+
+	// Invoke the callback with all the unmarshalled arguments
+	err = w.Handler.ValidateEmail(ctx, email)
+	return err
+}
+
+// ValidatePhoneNumber converts echo context to params.
+func (w *ServerInterfaceWrapper) ValidatePhoneNumber(ctx echo.Context) error {
+	var err error
+	// ------------- Path parameter "phone" -------------
+	var phone Phone
+
+	err = runtime.BindStyledParameter("simple", false, "phone", ctx.Param("phone"), &phone)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter phone: %s", err))
+	}
+
+	// Invoke the callback with all the unmarshalled arguments
+	err = w.Handler.ValidatePhoneNumber(ctx, phone)
 	return err
 }
 
@@ -156,6 +179,22 @@ func (w *ServerInterfaceWrapper) RetrieveProducts(ctx echo.Context) error {
 	return err
 }
 
+// RetrieveProductsByProductGroup converts echo context to params.
+func (w *ServerInterfaceWrapper) RetrieveProductsByProductGroup(ctx echo.Context) error {
+	var err error
+	// ------------- Path parameter "group" -------------
+	var group Group
+
+	err = runtime.BindStyledParameter("simple", false, "group", ctx.Param("group"), &group)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter group: %s", err))
+	}
+
+	// Invoke the callback with all the unmarshalled arguments
+	err = w.Handler.RetrieveProductsByProductGroup(ctx, group)
+	return err
+}
+
 // RetrieveProduct converts echo context to params.
 func (w *ServerInterfaceWrapper) RetrieveProduct(ctx echo.Context) error {
 	var err error
@@ -169,6 +208,24 @@ func (w *ServerInterfaceWrapper) RetrieveProduct(ctx echo.Context) error {
 
 	// Invoke the callback with all the unmarshalled arguments
 	err = w.Handler.RetrieveProduct(ctx, id)
+	return err
+}
+
+// CustomerLogin converts echo context to params.
+func (w *ServerInterfaceWrapper) CustomerLogin(ctx echo.Context) error {
+	var err error
+
+	// Invoke the callback with all the unmarshalled arguments
+	err = w.Handler.CustomerLogin(ctx)
+	return err
+}
+
+// CustomerRegistration converts echo context to params.
+func (w *ServerInterfaceWrapper) CustomerRegistration(ctx echo.Context) error {
+	var err error
+
+	// Invoke the callback with all the unmarshalled arguments
+	err = w.Handler.CustomerRegistration(ctx)
 	return err
 }
 
@@ -194,50 +251,57 @@ func RegisterHandlers(router EchoRouter, si ServerInterface) {
 		Handler: si,
 	}
 
-	router.POST("/customer/login", wrapper.CustomerLogin)
-	router.POST("/customer/registration", wrapper.CustomerRegistration)
-	router.PATCH("/customer/:id", wrapper.ModifyCustomer)
+	router.PATCH("/customer/modify/:id", wrapper.ModifyCustomer)
+	router.GET("/customer/validate/email/:email", wrapper.ValidateEmail)
+	router.GET("/customer/validate/phone-number/:phone", wrapper.ValidatePhoneNumber)
 	router.GET("/invoice", wrapper.RetrieveInvoices)
 	router.GET("/invoice/:id", wrapper.RetrieveInvoice)
 	router.GET("/order", wrapper.RetrieveOrders)
 	router.POST("/order", wrapper.CreateOrder)
 	router.GET("/order/:id", wrapper.RetrieveOrder)
 	router.GET("/product", wrapper.RetrieveProducts)
+	router.GET("/product/filter/product-group/:group", wrapper.RetrieveProductsByProductGroup)
 	router.GET("/product/:id", wrapper.RetrieveProduct)
+	router.POST("/sign-in", wrapper.CustomerLogin)
+	router.POST("/sign-up", wrapper.CustomerRegistration)
 
 }
 
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"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",
+	"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",
 }
 
 // GetSwagger returns the Swagger specification corresponding to the generated code
