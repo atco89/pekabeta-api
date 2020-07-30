@@ -14,15 +14,41 @@ func NewCustomerRepository(conn *gorm.DB) *CustomerRepository {
 }
 
 func (c CustomerRepository) EmailValidation(email *string) (domain.Validation, error) {
-	panic("implement me")
+	mail := *email
+	validation := domain.Validation{}
+
+	validation.IsValid = false
+
+	if err := c.Conn.First(&domain.Customer{}, domain.Customer{Email: mail}).Error; err != nil {
+		if gorm.IsRecordNotFoundError(err) {
+			validation.IsValid = true
+			return validation, nil
+		}
+		return validation, err
+	}
+
+	return validation, nil
 }
 
 func (c CustomerRepository) PhoneNumberValidation(phoneNumber *string) (domain.Validation, error) {
-	panic("implement me")
+	phone := *phoneNumber
+	validation := domain.Validation{}
+
+	validation.IsValid = false
+
+	if err := c.Conn.First(&domain.Customer{}, domain.Customer{PhoneNumber: phone}).Error; err != nil {
+		if gorm.IsRecordNotFoundError(err) {
+			validation.IsValid = true
+			return validation, nil
+		}
+		return validation, err
+	}
+
+	return validation, nil
 }
 
 func (c CustomerRepository) Registration(customer *domain.Customer) error {
-	panic("implement me")
+	return c.Conn.Create(customer).Error
 }
 
 func (c CustomerRepository) Login(login domain.Login) (*domain.Customer, *domain.Error) {
