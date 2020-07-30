@@ -1,6 +1,8 @@
 package rest
 
 import (
+	"github.com/google/uuid"
+	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo/v4"
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
@@ -132,39 +134,121 @@ func (a Api) ModifyCustomer(ctx echo.Context, id api.Id) error {
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 
 func (a Api) RetrieveProducts(ctx echo.Context) error {
-	panic("implement me")
+	products, err := a.product.RetrieveAll()
+	if err != nil {
+		if gorm.IsRecordNotFoundError(err) {
+			ctx.Response().WriteHeader(http.StatusNotFound)
+			return err
+		}
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return err
+	}
+	return ctx.JSON(http.StatusOK, products)
 }
 
 func (a Api) RetrieveProductsByProductGroup(ctx echo.Context, group api.Group) error {
-	panic("implement me")
+	products, err := a.product.RetrieveProductGroup(domain.ProductGroup(group))
+	if err != nil {
+		if gorm.IsRecordNotFoundError(err) {
+			ctx.Response().WriteHeader(http.StatusNotFound)
+			return err
+		}
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return err
+	}
+	return ctx.JSON(http.StatusOK, products)
 }
 
 func (a Api) RetrieveProduct(ctx echo.Context, id api.Id) error {
-	panic("implement me")
+	product, err := a.product.RetrieveOne(uuid.MustParse(string(id)))
+	if err != nil {
+		if gorm.IsRecordNotFoundError(err) {
+			ctx.Response().WriteHeader(http.StatusNotFound)
+			return err
+		}
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return err
+	}
+	return ctx.JSON(http.StatusOK, product)
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 
 func (a Api) CreateOrder(ctx echo.Context) error {
-	panic("implement me")
+	order := &api.Order{}
+	if err := ctx.Bind(order); err != nil {
+		ctx.Response().WriteHeader(http.StatusOK)
+		return err
+	}
+
+	if err := a.order.Store(&domain.Order{
+		CustomerID:   uuid.MustParse(order.CustomerId),
+		OrderItems:   DecodeOrderItems(order.OrderItems),
+		OrderStatus:  domain.OrderStatus(order.OrderStatus),
+		ShippingType: domain.ShippingType(order.ShippingType),
+	}); err != nil {
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return err
+	}
+
+	ctx.Response().WriteHeader(http.StatusCreated)
+	return nil
 }
 
 func (a Api) RetrieveOrders(ctx echo.Context) error {
-	panic("implement me")
+	orders, err := a.order.RetrieveAll(uuid.MustParse(ctx.Request().Header.Get("Authorization")))
+	if err != nil {
+		if gorm.IsRecordNotFoundError(err) {
+			ctx.Response().WriteHeader(http.StatusNotFound)
+			return err
+		}
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return err
+	}
+	return ctx.JSON(http.StatusOK, orders)
 }
 
 func (a Api) RetrieveOrder(ctx echo.Context, id api.Id) error {
-	panic("implement me")
+	order, err := a.order.RetrieveOne(uuid.MustParse(string(id)),
+		uuid.MustParse(ctx.Request().Header.Get("Authorization")))
+	if err != nil {
+		if gorm.IsRecordNotFoundError(err) {
+			ctx.Response().WriteHeader(http.StatusNotFound)
+			return err
+		}
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return err
+	}
+	return ctx.JSON(http.StatusOK, order)
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 
 func (a Api) RetrieveInvoices(ctx echo.Context) error {
-	panic("implement me")
+	invoices, err := a.invoice.RetrieveAll(uuid.MustParse(ctx.Request().Header.Get("Authorization")))
+	if err != nil {
+		if gorm.IsRecordNotFoundError(err) {
+			ctx.Response().WriteHeader(http.StatusNotFound)
+			return err
+		}
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return err
+	}
+	return ctx.JSON(http.StatusOK, invoices)
 }
 
 func (a Api) RetrieveInvoice(ctx echo.Context, id api.Id) error {
-	panic("implement me")
+	invoice, err := a.invoice.RetrieveOne(uuid.MustParse(string(id)),
+		uuid.MustParse(ctx.Request().Header.Get("Authorization")))
+	if err != nil {
+		if gorm.IsRecordNotFoundError(err) {
+			ctx.Response().WriteHeader(http.StatusNotFound)
+			return err
+		}
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return err
+	}
+	return ctx.JSON(http.StatusOK, invoice)
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== */

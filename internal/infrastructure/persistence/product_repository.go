@@ -15,13 +15,19 @@ func NewProductRepository(conn *gorm.DB) *ProductRepository {
 }
 
 func (p ProductRepository) RetrieveAll() (*[]domain.Product, error) {
-	panic("implement me")
+	products := &[]domain.Product{}
+	err := p.Conn.Find(products).Error
+	return products, err
 }
 
-func (p ProductRepository) RetrieveProductGroup(productGroup *domain.ProductGroup) (*[]domain.Product, error) {
-	panic("implement me")
+func (p ProductRepository) RetrieveProductGroup(productGroup domain.ProductGroup) (*[]domain.Product, error) {
+	products := &[]domain.Product{}
+	err := p.Conn.Find(products, domain.Product{ProductGroup: productGroup}).Error
+	return products, err
 }
 
 func (p ProductRepository) RetrieveOne(id uuid.UUID) (*domain.Product, error) {
-	panic("implement me")
+	products := &domain.Product{}
+	err := p.Conn.First(products, domain.Product{Base: domain.Base{ID: id}}).Error
+	return products, err
 }
