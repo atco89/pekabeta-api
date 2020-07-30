@@ -65,10 +65,15 @@ func (c CustomerRepository) Login(login domain.Login) (*domain.Customer, error) 
 }
 
 func (c CustomerRepository) Modify(customer *domain.Customer) error {
-	return c.Conn.Model(customer).UpdateColumns(domain.Customer{
+	modifiedCustomer := domain.Customer{
 		FirstName:   customer.FirstName,
 		LastName:    customer.LastName,
 		Email:       customer.Email,
 		PhoneNumber: customer.PhoneNumber,
-	}).Error
+	}
+
+	if customer.Password != "" {
+		modifiedCustomer.Password = customer.Password
+	}
+	return c.Conn.Model(customer).UpdateColumns(modifiedCustomer).Error
 }
