@@ -79,11 +79,54 @@ func (a Api) CustomerRegistration(ctx echo.Context) error {
 }
 
 func (a Api) CustomerLogin(ctx echo.Context) error {
-	panic("implement me")
+	login := &api.Login{}
+	if err := ctx.Bind(login); err != nil {
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return err
+	}
+
+	customer, err := a.customer.Login(domain.Login{
+		Email:    login.Email,
+		Password: []byte(login.Password),
+	})
+
+	if err != nil {
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return err
+	}
+	return ctx.JSON(http.StatusOK, customer)
 }
 
 func (a Api) ModifyCustomer(ctx echo.Context, id api.Id) error {
-	panic("implement me")
+	customer := &api.Customer{}
+	if err := ctx.Bind(customer); err != nil {
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return err
+	}
+
+	modifiedCustomer := &domain.Customer{
+		FirstName:   customer.FirstName,
+		LastName:    customer.LastName,
+		Email:       customer.Email,
+		PhoneNumber: customer.PhoneNumber,
+	}
+
+	if customer.Password != "" {
+		password, err := bcrypt.GenerateFromPassword([]byte(customer.Password), bcrypt.MinCost)
+		if err != nil {
+			ctx.Response().WriteHeader(http.StatusInternalServerError)
+			return err
+		}
+		modifiedCustomer.Password = string(password)
+	}
+
+	if err := a.customer.Modify(modifiedCustomer); err != nil {
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return err
+	}
+
+	ctx.Response().WriteHeader(http.StatusCreated)
+	return nil
 }
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== */
