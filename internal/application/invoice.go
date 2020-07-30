@@ -16,6 +16,10 @@ func NewInvoiceInteractor(repo repository.InvoiceRepository) *InvoiceInteractor 
 	}
 }
 
+func (i InvoiceInteractor) Store(invoice *domain.Invoice) error {
+	return i.repository.Store(invoice)
+}
+
 func (i InvoiceInteractor) RetrieveAll(customerId uuid.UUID) (*[]domain.Invoice, error) {
 	return i.repository.RetrieveAll(customerId)
 }

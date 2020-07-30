@@ -15,33 +15,7 @@ func NewOrderRepository(conn *gorm.DB) *OrderRepository {
 }
 
 func (o OrderRepository) Store(order *domain.Order) error {
-	tx := o.Conn.Begin()
-	defer func() {
-		if r := recover(); r != nil {
-			tx.Rollback()
-		}
-	}()
-
-	if err := tx.Error; err != nil {
-		return err
-	}
-
-	if err := tx.Create(&order).Error; err != nil {
-		tx.Rollback()
-		return err
-	}
-
-	if err := tx.Create(&domain.Invoice{
-		OrderId:       order.ID,
-		Amount:        100.00,
-		PaymentType:   domain.DEBIT_CARD,
-		PaymentStatus: domain.COMPLETED,
-	}).Error; err != nil {
-		tx.Rollback()
-		return err
-	}
-
-	return tx.Commit().Error
+	return o.Conn.Create(order).Error
 }
 
 func (o OrderRepository) RetrieveAll(customerId uuid.UUID) (*[]domain.Order, error) {

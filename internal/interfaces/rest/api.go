@@ -224,6 +224,27 @@ func (a Api) RetrieveOrder(ctx echo.Context, id api.Id) error {
 
 /* ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 
+func (a Api) CreateInvoice(ctx echo.Context) error {
+	invoice := &api.Invoice{}
+	if err := ctx.Bind(invoice); err != nil {
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return err
+	}
+
+	if err := a.invoice.Store(&domain.Invoice{
+		OrderId:       uuid.MustParse(invoice.OrderId),
+		Amount:        invoice.Amount,
+		PaymentType:   domain.DEBIT_CARD,
+		PaymentStatus: domain.COMPLETED,
+	}); err != nil {
+		ctx.Response().WriteHeader(http.StatusInternalServerError)
+		return err
+	}
+
+	ctx.Response().WriteHeader(http.StatusCreated)
+	return nil
+}
+
 func (a Api) RetrieveInvoices(ctx echo.Context) error {
 	invoices, err := a.invoice.RetrieveAll(uuid.MustParse(ctx.Request().Header.Get("Authorization")))
 	if err != nil {
@@ -250,5 +271,3 @@ func (a Api) RetrieveInvoice(ctx echo.Context, id api.Id) error {
 	}
 	return ctx.JSON(http.StatusOK, invoice)
 }
-
-/* ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== */

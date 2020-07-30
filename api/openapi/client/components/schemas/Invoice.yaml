@@ -6,10 +6,6 @@ properties:
   amount:
     type: number
     format: float
-  payment_type:
-    $ref: "./schemas.yaml#/PaymentType"
-  payment_status:
-    $ref: "./schemas.yaml#/PaymentStatus"
 required:
   - order_id
   - amount

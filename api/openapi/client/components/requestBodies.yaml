@@ -16,3 +16,9 @@ OrderRequest:
       schema:
         $ref: "./schemas/schemas.yaml#/Order"
   required: true
+InvoiceRequest:
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/schemas.yaml#/Invoice"
+  required: true

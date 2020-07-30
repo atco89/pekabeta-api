@@ -14,6 +14,10 @@ func NewInvoiceRepository(conn *gorm.DB) *InvoiceRepository {
 	return &InvoiceRepository{Conn: conn}
 }
 
+func (i InvoiceRepository) Store(invoice *domain.Invoice) error {
+	return i.Conn.Create(invoice).Error
+}
+
 func (i InvoiceRepository) RetrieveAll(customerId uuid.UUID) (*[]domain.Invoice, error) {
 	invoices := &[]domain.Invoice{}
 	err := i.Conn.Find(invoices).Error

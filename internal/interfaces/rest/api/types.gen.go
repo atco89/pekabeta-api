@@ -24,10 +24,8 @@ type Error struct {
 
 // Invoice defines model for Invoice.
 type Invoice struct {
-	Amount        float32       `json:"amount"`
-	OrderId       string        `json:"order_id"`
-	PaymentStatus PaymentStatus `json:"payment_status"`
-	PaymentType   PaymentType   `json:"payment_type"`
+	Amount  float32 `json:"amount"`
+	OrderId string  `json:"order_id"`
 }
 
 // Invoices defines model for Invoices.
@@ -80,29 +78,6 @@ const (
 
 // Orders defines model for Orders.
 type Orders []Order
-
-// PaymentStatus defines model for PaymentStatus.
-type PaymentStatus string
-
-// List of PaymentStatus
-const (
-	PaymentStatus_canceled  PaymentStatus = "canceled"
-	PaymentStatus_completed PaymentStatus = "completed"
-	PaymentStatus_pending   PaymentStatus = "pending"
-	PaymentStatus_refunded  PaymentStatus = "refunded"
-)
-
-// PaymentType defines model for PaymentType.
-type PaymentType string
-
-// List of PaymentType
-const (
-	PaymentType_cash            PaymentType = "cash"
-	PaymentType_credit_card     PaymentType = "credit_card"
-	PaymentType_debit_card      PaymentType = "debit_card"
-	PaymentType_personal_cheque PaymentType = "personal_cheque"
-	PaymentType_transfer        PaymentType = "transfer"
-)
 
 // Product defines model for Product.
 type Product struct {
@@ -210,11 +185,17 @@ type CustomerLoginRequest Login
 // CustomerRequest defines model for CustomerRequest.
 type CustomerRequest Customer
 
+// InvoiceRequest defines model for InvoiceRequest.
+type InvoiceRequest Invoice
+
 // OrderRequest defines model for OrderRequest.
 type OrderRequest Order
 
 // ModifyCustomerRequestBody defines body for ModifyCustomer for application/json ContentType.
 type ModifyCustomerJSONRequestBody CustomerRequest
+
+// CreateInvoiceRequestBody defines body for CreateInvoice for application/json ContentType.
+type CreateInvoiceJSONRequestBody InvoiceRequest
 
 // CreateOrderRequestBody defines body for CreateOrder for application/json ContentType.
 type CreateOrderJSONRequestBody OrderRequest

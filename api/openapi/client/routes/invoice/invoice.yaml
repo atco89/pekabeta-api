@@ -1,3 +1,22 @@
+post:
+  summary: Create invoice.
+  description: Used to create new invoice.
+  operationId: CreateInvoice
+  requestBody:
+    $ref: "../../components/requestBodies.yaml#/InvoiceRequest"
+  responses:
+    201:
+      description: Created
+    400:
+      $ref: "../../components/responses.yaml#/BadRequest"
+    401:
+      $ref: "../../components/responses.yaml#/Unauthenticated"
+    403:
+      $ref: "../../components/responses.yaml#/Unauthorized"
+    409:
+      $ref: "../../components/responses.yaml#/Conflict"
+    500:
+      $ref: "../../components/responses.yaml#/InternalServerError"
 get:
   summary: Retrieve invoices.
   description: Used to retrieve invoices for certain customer id.
