@@ -37,16 +37,16 @@ type Login struct {
 	Password string `json:"password"`
 }
 
-// MeasurmentUnit defines model for MeasurmentUnit.
-type MeasurmentUnit string
+// MeasurementUnit defines model for MeasurementUnit.
+type MeasurementUnit string
 
-// List of MeasurmentUnit
+// List of MeasurementUnit
 const (
-	MeasurmentUnit_gram       MeasurmentUnit = "gram"
-	MeasurmentUnit_kilo       MeasurmentUnit = "kilo"
-	MeasurmentUnit_liter      MeasurmentUnit = "liter"
-	MeasurmentUnit_milliliter MeasurmentUnit = "milliliter"
-	MeasurmentUnit_piece      MeasurmentUnit = "piece"
+	MeasurementUnit_gram       MeasurementUnit = "gram"
+	MeasurementUnit_kilo       MeasurementUnit = "kilo"
+	MeasurementUnit_liter      MeasurementUnit = "liter"
+	MeasurementUnit_milliliter MeasurementUnit = "milliliter"
+	MeasurementUnit_piece      MeasurementUnit = "piece"
 )
 
 // Order defines model for Order.
@@ -81,13 +81,13 @@ type Orders []Order
 
 // Product defines model for Product.
 type Product struct {
-	Description    *string        `json:"description"`
-	ImagePath      *string        `json:"image_path"`
-	InStock        float32        `json:"in_stock"`
-	MeasurmentUnit MeasurmentUnit `json:"measurment_unit"`
-	Name           string         `json:"name"`
-	Price          float32        `json:"price"`
-	ProductGroup   ProductGroup   `json:"product_group"`
+	Description     *string          `json:"description"`
+	ImagePath       *string          `json:"image_path"`
+	InStock         float32          `json:"in_stock"`
+	MeasurementUnit *MeasurementUnit `json:"measurement_unit,omitempty"`
+	Name            string           `json:"name"`
+	Price           float32          `json:"price"`
+	ProductGroup    ProductGroup     `json:"product_group"`
 }
 
 // ProductGroup defines model for ProductGroup.

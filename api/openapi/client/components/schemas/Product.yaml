@@ -7,8 +7,8 @@ properties:
     nullable: true
   product_group:
     $ref: "./schemas.yaml#/ProductGroup"
-  measurment_unit:
-    $ref: "./schemas.yaml#/MeasurmentUnit"
+  measurement_unit:
+    $ref: "./schemas.yaml#/MeasurementUnit"
   price:
     type: number
     format: float

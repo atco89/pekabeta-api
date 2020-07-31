@@ -20,8 +20,8 @@ Invoices:
   type: array
   items:
     $ref: "./Invoice.yaml"
-MeasurmentUnit:
-  $ref: "./MeasurmentUnit.yaml"
+MeasurementUnit:
+  $ref: "./MeasurementUnit.yaml"
 OrderItem:
   $ref: "./OrderItem.yaml"
 OrderStatus:
